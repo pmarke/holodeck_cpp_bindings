@@ -1,5 +1,5 @@
 #include "holodeck_cpp_bindings.h"
-
+#include <unistd.h>
 
 
 int main(int argc, char** argv)
@@ -10,9 +10,19 @@ int main(int argc, char** argv)
 
 	holodeck_bindings::Holodeck holodeck;
 
-	// py::object test = py::module::import("test");
 
 	holodeck.make("UrbanCity",holodeck_bindings::OPENGL4);
+
+	holodeck.reset();
+
+	int milliseconds = 100;
+
+	for(int i = 0; i < 300; i++) {
+		holodeck.step(0,0,1,10);
+
+		// usleep(milliseconds * 1000); // takes microseconds
+	}
+	
 
 	return 0;
 
