@@ -4,6 +4,10 @@
 #include <pybind11/numpy.h>
 #include <pybind11/stl.h>
 #include <pybind11/eigen.h>
+#include <stdint.h>
+
+#include <opencv2/opencv.hpp>
+// #include <pybind11/literals.h>
 
 #include <string>
 
@@ -13,7 +17,7 @@ namespace py = pybind11;
 
 namespace holodeck_bindings {
 
-	// using namespace pybind11::literals
+	using namespace pybind11::literals;
 
 	enum GL_VERSION
 	{

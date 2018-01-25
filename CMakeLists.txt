@@ -5,6 +5,8 @@ add_compile_options(-std=c++11 -fvisibility=hidden)
 
 find_package(pybind11 REQUIRED)
 
+# find_package(OpenCV REQUIRED)
+
 find_package (Eigen3 REQUIRED NO_MODULE)
 
 include_directories(${EIGEN3_INCLUDE_DIR})

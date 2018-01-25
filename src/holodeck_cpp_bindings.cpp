@@ -70,21 +70,35 @@ void Holodeck::step(float roll, float pitch, float altitude, float yaw_rate) {
 
     py::dict state = result_py[0];
 
-    float reward = result_py[1].cast<float>();
+    float reward;
+    bool terminal;
+    
+    py::array img;
 
-    bool terminal = result_py[2].cast<bool>();
+
+
 
 
     int i = 1;
-    for (auto list : state) {
+    for (auto &&list : state) {
 
         switch(i)
         {
             case 1:
             {
-                reward = list.second;
-                py::print(list);
+                reward = list.second.cast<float>();
+
                 break;
+            }
+            case 2:
+            {
+                terminal = list.second.cast<float>();
+                break;
+            }
+            case 3:
+            {
+                img = list.second.cast<py::array>();
+                py::print(img.attr("shape"));
             }
             default :
             {
@@ -95,13 +109,13 @@ void Holodeck::step(float roll, float pitch, float altitude, float yaw_rate) {
 
     }
 
-    // py::print(state[]);
-    // py::print(reward);
+ //    py::print(state[]);
+ //    py::print(reward);
 
-    // for(auto item : object)
+ //    for(auto item : object)
 
-    // std::tuple<int> data = env_.attr("step")(v);
-    // = result_py;
+ //    std::tuple<int> data = env_.attr("step")(v);
+ //    = result_py;
 
 	// py::object result_py = step(command);
 
