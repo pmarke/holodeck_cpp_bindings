@@ -47,48 +47,45 @@ void Holodeck::step(float roll, float pitch, float altitude, float yaw_rate) {
     // extract state information
     state_ = result_py[0];
 
-
-  
-
 }
 
-Eigen::Ref< Eigen::Matrix3f> Holodeck::get_orientation_sensor_data() {
+void Holodeck::get_orientation_sensor_data(Eigen::Ref< Eigen::Matrix3f> m) {
 
     // extract data
     py::array pyData = state_.attr("get")(5);
 
     // return pointer of data
-    return = pyData.cast<py::EigenDRef<Eigen::Matrix3f>>();
+    m = pyData.cast<py::EigenDRef<Eigen::Matrix3f>>();
     
 }
 
-Eigen_RowVector6f Holodeck::get_imu_sensor_data() {
+void Holodeck::get_imu_sensor_data(Eigen::Ref<Eigen_RowVector6f> v) {
 
     // extract the data
     py::array pyData = state_.attr("get")(6);
 
     // return the data
-    return pyData.cast<Eigen::Ref<Eigen::Matrix<float, 6,1>>>();
+    v = pyData.cast<py::EigenDRef<Eigen::Matrix<float, 6,1>>>();
 
 
 }
 
-Eigen::RowVector3f Holodeck::get_location_sensor_data() {
+void Holodeck::get_location_sensor_data(Eigen::Ref<Eigen::RowVector3f> v) {
 
     // extract the data
     py::array pyData = state_.attr("get")(9);
 
     // return the data
-    return pyData.cast<Eigen::Ref<Eigen::RowVector3f>>();
+    v = pyData.cast<py::EigenDRef<Eigen::Matrix<float,3,1>>>();
 }
 
-Eigen::RowVector3f Holodeck::get_velocity_sensor_data() {
+void Holodeck::get_velocity_sensor_data(Eigen::Ref<Eigen::RowVector3f> v) {
 
     // extract the data
     py::array pyData = state_.attr("get")(10);
 
     // return the data
-    return pyData.cast<Eigen::Ref<Eigen::RowVector3f>>();
+    v = pyData.cast<py::EigenDRef<Eigen::Matrix<float,3,1>>>();
 }
 
 void Holodeck::getCammeraDimensions(py::array pyImg) {
@@ -107,7 +104,6 @@ void Holodeck::getCammeraDimensions(py::array pyImg) {
 
 
 }
-
 
 
 void Holodeck::get_primary_player_camera(cv::Mat& img) {

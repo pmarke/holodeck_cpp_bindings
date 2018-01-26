@@ -65,19 +65,19 @@ namespace holodeck_bindings {
         void step(float roll, float pitch, float altitude, float yaw_rate);
         
         // return the orientation sensor data
-        void get_orientation_sensor_data();
+        void get_orientation_sensor_data(Eigen::Ref<Eigen::Matrix3f> m);
 
         // return the imu sensor data
-        Eigen_RowVector6f get_imu_sensor_data();
+        void get_imu_sensor_data(Eigen::Ref<Eigen_RowVector6f> v);
 
         // return the location sensor data
-        Eigen::RowVector3f get_location_sensor_data();
+        void get_location_sensor_data(Eigen::Ref<Eigen::RowVector3f> v);
 
         // return the velocity sensor data
-        Eigen::RowVector3f get_velocity_sensor_data();
+        void get_velocity_sensor_data(Eigen::Ref<Eigen::RowVector3f> v);
 
         // returns the primary player camera data
-        Eigen::Ref< Eigen::Matrix3f> get_primary_player_camera(cv::Mat& img);
+        void get_primary_player_camera(cv::Mat& img);
 
             
 
