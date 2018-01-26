@@ -26,6 +26,8 @@ namespace holodeck_bindings {
 
 	typedef Eigen::Matrix<float, 6,1> Eigen_RowVector6f;
 
+	typedef Eigen::Matrix<uint8_t,Eigen::Dynamic,Eigen::Dynamic,Eigen::Dynamic> Eigen_MatrixX;
+
 	enum GL_VERSION
 	{
 		OPENGL4=4,

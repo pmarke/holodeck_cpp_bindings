@@ -125,6 +125,9 @@ void Holodeck::get_primary_player_camera(cv::Mat& img) {
 
     py::array pyImg = state_.attr("get")(3);
 
+    Eigen_MatrixX test;
+    test(0,0,0) = 1;// = pyImg.cast<Eigen_MatrixX>;
+
     // py::object arrayInterface = pyImg.attr("data");
 
     // py::array flat = pyImg.attr("flat");
