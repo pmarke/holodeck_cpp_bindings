@@ -1,0 +1,16 @@
+# - Config file for the holodeck_cpp_bindings package
+# It defines the following variables
+#  HOLODECK_CPP_BINDINGS_INCLUDE_DIRS - include directories for FooBar
+#  HOLODECK_CPP_BINDINGS_LIBRARIES    - libraries to link against
+
+# Compute paths
+get_filename_component(HOLODECK_CPP_BINDINGS_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+
+
+# library dependencies
+include("${HOLODECK_CPP_BINDINGS_CMAKE_DIR}/holodeck_cpp_bindings.cmake")
+
+set(HOLODECK_CPP_BINDINGS_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
+set(HOLODECK_CPP_BINDINGS_LIBRARIES "@PROJECT_NAME@")
+# set(RRANSAC_VERSION "@HOLODECK_CPP_BINDINGS_VERSION@")
+
