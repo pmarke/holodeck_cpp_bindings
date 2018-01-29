@@ -1,27 +1,20 @@
 #pragma once
 
-// includes for pybind
-#include <pybind11/embed.h>
-#include <pybind11/numpy.h>
-#include <pybind11/stl.h>
-#include <pybind11/eigen.h>
-
-
-#include <opencv2/opencv.hpp>
-
-#include <Eigen/Dense>
-
 // standard libraries
 #include <stdint.h>
 #include <iostream>
 #include <string>
+#include <memory>
 
+#include <opencv2/opencv.hpp>
+#include <Eigen/Dense>
 
+// redefinition of PYBIND11_EXPORT from the pybind source code.
+// We do this so that we don't have to pop the pimpl and include
+// private pybind11 implementation details.
+#define PYBIND11_EXPORT __attribute__ ((visibility("default")))
 
-namespace py = pybind11;
-
-
-namespace holodeck_bindings {
+namespace holodeck {
 
     typedef Eigen::Matrix<float, 6,1> Eigen_RowVector6f;
 
@@ -48,7 +41,7 @@ namespace holodeck_bindings {
 
     };
 
-    class Holodeck
+    class PYBIND11_EXPORT Holodeck
     {
 
     public:
@@ -79,46 +72,10 @@ namespace holodeck_bindings {
         // returns the primary player camera data
         void get_primary_player_camera(cv::Mat& img);
 
-            
-
-        
-
-
-
     private:
-
-        py::scoped_interpreter guard{};// start the py interpreter
-        py::object holodeck_module_;   // used to import Holodeck.py
-        py::object holodeck_;          // Holodeck class. from Holodeck import Holodeck
-        py::object env_;               // Environment object. env=Holodeck.make
-        py::dict state_;               // get the state of the copter
-
-        // allocates memory for the primary player camera image
-        void allocatePrimaryPlayerCamera(py::array pyImg);
-
-        // deallocates memory for the primary player camera image
-        void deallocatePrimaryPlayerCamera();
-
-        void getCammeraDimensions(py::array pyImg);
-
-
-        // primary player camera data
-        int height_;
-        int width_;
-        int depth_;
-        bool allocated_ = false;
-
-        
-        
-
-
-
-
-
-
+        // Forward declaration
+        class Impl;
+        // Smart pointer to the implementation, along with custom deleter
+        std::unique_ptr<Impl, void (*)(Impl *)> impl_;
     };
-
-
-
-
 }
