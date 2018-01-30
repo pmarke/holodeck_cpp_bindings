@@ -40,7 +40,7 @@ public:
     // take a step in the world
     void step(float roll, float pitch, float altitude, float yaw_rate) {
         // pack commands up
-        Eigen::RowVector4f command(roll,pitch,altitude,yaw_rate);
+        Eigen::RowVector4f command(roll,pitch,yaw_rate,altitude);
 
         // send the commands to the simulator and get states
         py::tuple result_py = env_.attr("step")(command);

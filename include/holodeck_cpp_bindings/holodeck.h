@@ -55,7 +55,7 @@ namespace holodeck {
         void reset();
 
         // take a step in the world
-        void step(float roll, float pitch, float altitude, float yaw_rate);
+        void step(float roll, float pitch, float yaw_rate, float altitude);
         
         // return the orientation sensor data
         void get_orientation_sensor_data(Eigen::Ref<Eigen::Matrix3f> m);

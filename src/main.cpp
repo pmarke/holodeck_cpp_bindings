@@ -8,7 +8,7 @@ int main(int argc, char** argv)
 
     
     // intantiate the holodeck object
-    holodeck_bindings::Holodeck holodeck;
+    holodeck::Holodeck holodeck;
 
 
     // create the environment
